@@ -33,14 +33,14 @@ public class GameScreen implements Screen {
     private static final float MOVE_SPEED = 300f; // пикселей в секунду
 
     private static final float HP_BAR_X = 20f;
-    private static final float HP_BAR_Y = 735f;
+    private static final float HP_BAR_Y = 748f;
     private static final float HP_BAR_WIDTH = 140f;
     private static final float HP_BAR_HEIGHT = 18f;
 
-    private static final float SKILL_SIZE = 48f;
-    private static final float SKILL_Y = 20f;
-    private static final float SKILL1_X = 182f;
-    private static final float SKILL2_X = 250f;
+    private static final float SKILL_RADIUS = 26f;
+    private static final float SKILL_CENTER_Y = 46f;
+    private static final float SKILL1_CENTER_X = 204f;
+    private static final float SKILL2_CENTER_X = 276f;
 
     private float squareX;
     private float squareY;
@@ -108,15 +108,17 @@ public class GameScreen implements Screen {
         shapeRenderer.setColor(0.0f, 0.0f, 0.0f, 0.0f);
         shapeRenderer.rect(squareX, squareY, SQUARE_SIZE, SQUARE_SIZE);
 
+        // HP bar
         shapeRenderer.setColor(0.25f, 0.1f, 0.1f, 1.0f);
         shapeRenderer.rect(HP_BAR_X, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT);
 
         shapeRenderer.setColor(0.2f, 0.75f, 0.3f, 1.0f);
         shapeRenderer.rect(HP_BAR_X, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT);
 
+        // Skills
         shapeRenderer.setColor(0.12f, 0.14f, 0.2f, 1.0f);
-        shapeRenderer.rect(SKILL1_X, SKILL_Y, SKILL_SIZE, SKILL_SIZE);
-        shapeRenderer.rect(SKILL2_X, SKILL_Y, SKILL_SIZE, SKILL_SIZE);
+        shapeRenderer.circle(SKILL1_CENTER_X, SKILL_CENTER_Y, SKILL_RADIUS);
+        shapeRenderer.circle(SKILL2_CENTER_X, SKILL_CENTER_Y, SKILL_RADIUS);
 
         shapeRenderer.end();
 
@@ -130,10 +132,10 @@ public class GameScreen implements Screen {
         shapeRenderer.rect(HP_BAR_X, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT);
 
         shapeRenderer.setColor(Color.CYAN);
-        shapeRenderer.rect(SKILL1_X, SKILL_Y, SKILL_SIZE, SKILL_SIZE);
+        shapeRenderer.circle(SKILL1_CENTER_X, SKILL_CENTER_Y, SKILL_RADIUS);
 
         shapeRenderer.setColor(Color.ORANGE);
-        shapeRenderer.rect(SKILL2_X, SKILL_Y, SKILL_SIZE, SKILL_SIZE);
+        shapeRenderer.circle(SKILL2_CENTER_X, SKILL_CENTER_Y, SKILL_RADIUS);
 
         shapeRenderer.end();
 
@@ -146,9 +148,6 @@ public class GameScreen implements Screen {
         layout.setText(font, hintText);
         font.draw(batch, hintText, (480f - layout.width) / 2f, 790f);
 
-        font.setColor(Color.WHITE);
-        font.getData().setScale(1.0f);
-        font.draw(batch, "HP: 100 / 100", HP_BAR_X, HP_BAR_Y + HP_BAR_HEIGHT + 18f);
 
         font.setColor(Color.YELLOW);
         font.getData().setScale(1.1f);
@@ -156,23 +155,7 @@ public class GameScreen implements Screen {
         layout.setText(font, scoreText);
         font.draw(batch, scoreText, 460f - layout.width, 765f);
 
-        font.getData().setScale(0.9f);
 
-        font.setColor(Color.CYAN);
-        layout.setText(font, "EMP");
-        font.draw(batch, "EMP", SKILL1_X + (SKILL_SIZE - layout.width) / 2f, SKILL_Y + 38f);
-
-        font.setColor(Color.ORANGE);
-        layout.setText(font, "RAM");
-        font.draw(batch, "RAM", SKILL2_X + (SKILL_SIZE - layout.width) / 2f, SKILL_Y + 38f);
-
-        font.setColor(Color.LIGHT_GRAY);
-        font.getData().setScale(0.75f);
-        layout.setText(font, "[Q]");
-        font.draw(batch, "[Q]", SKILL1_X + (SKILL_SIZE - layout.width) / 2f, SKILL_Y + 18f);
-
-        layout.setText(font, "[E]");
-        font.draw(batch, "[E]", SKILL2_X + (SKILL_SIZE - layout.width) / 2f, SKILL_Y + 18f);
 
         batch.end();
 
